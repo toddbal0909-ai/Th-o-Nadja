@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Théo &amp; Nadja</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FBF3EE;
+    --blush:#F1D9D3;
+    --rose:#C67C82;
+    --wine:#5B3438;
+    --wine-soft:#8B5A5C;
+    --thread:#B23A48;
+    --gold:#C9A55C;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--cream);
+    color:var(--wine);
+    font-family:'Work Sans', sans-serif;
+    font-weight:300;
+    overflow-x:hidden;
+  }
+  h1,h2,h3, .display{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+  }
+  .italic{font-style:italic;font-weight:400;}
+
+  /* ---------- INTRO / HEARTBEAT ---------- */
+  body.locked{overflow:hidden;}
+  .intro-overlay{
+    position:fixed;
+    inset:0;
+    z-index:9999;
+    background:var(--cream);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    transition:opacity 0.7s ease, visibility 0.7s ease;
+  }
+  .intro-overlay.hide{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+  }
+  .heart-shape{
+    position:relative;
+    width:52px;
+    height:46px;
+    animation:heartbeat 1.3s ease-in-out infinite;
+  }
+  .heart-shape::before,
+  .heart-shape::after{
+    content:"";
+    position:absolute;
+    top:0;
+    width:27px;
+    height:43px;
+    background:var(--thread);
+    border-radius:27px 27px 0 0;
+  }
+  .heart-shape::before{
+    left:26px;
+    transform:rotate(-45deg);
+    transform-origin:0 100%;
+  }
+  .heart-shape::after{
+    left:0;
+    transform:rotate(45deg);
+    transform-origin:100% 100%;
+  }
+  @keyframes heartbeat{
+    0%,100%{transform:scale(1);}
+    15%{transform:scale(1.18);}
+    30%{transform:scale(1);}
+    45%{transform:scale(1.18);}
+    60%{transform:scale(1);}
+  }
+  .intro-caption{
+    margin-top:2.2rem;
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:0.9rem;
+    letter-spacing:0.1em;
+    color:var(--wine-soft);
+    opacity:0;
+    animation:fadeIn 1s ease forwards;
+    animation-delay:1.6s;
+  }
+  @keyframes fadeIn{
+    to{opacity:1;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    min-height:100svh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    position:relative;
+    padding:2rem 1.5rem;
+  }
+  .hero-eyebrow{
+    letter-spacing:0.3em;
+    text-transform:uppercase;
+    font-size:0.7rem;
+    color:var(--wine-soft);
+    margin-bottom:1.5rem;
+  }
+  .hero-names{
+    font-size:clamp(3rem, 12vw, 7rem);
+    line-height:0.95;
+    display:flex;
+    align-items:center;
+    gap:0.4em;
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+  .hero-amp{
+    font-style:italic;
+    color:var(--rose);
+    font-size:0.6em;
+  }
+  .hero-nicknames{
+    margin-top:0.9rem;
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:0.95rem;
+    letter-spacing:0.08em;
+    color:var(--rose);
+  }
+  .hero-sub{
+    margin-top:1.75rem;
+    font-size:1.05rem;
+    color:var(--wine-soft);
+    max-width:32ch;
+  }
+  .scroll-hint{
+    position:absolute;
+    bottom:2.5rem;
+    font-size:0.7rem;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    color:var(--wine-soft);
+    opacity:0.7;
+  }
+  .scroll-hint::after{
+    content:"";
+    display:block;
+    width:1px;
+    height:34px;
+    background:var(--wine-soft);
+    margin:0.6rem auto 0;
+    animation:pulse 2s infinite;
+  }
+  @keyframes pulse{
+    0%,100%{opacity:0.2;}
+    50%{opacity:0.8;}
+  }
+
+  /* ---------- COUNTDOWN ---------- */
+  .countdown-section{
+    padding:6rem 1.5rem 7rem;
+    text-align:center;
+    background:var(--blush);
+    position:relative;
+  }
+  .section-label{
+    letter-spacing:0.25em;
+    text-transform:uppercase;
+    font-size:0.72rem;
+    color:var(--wine-soft);
+    margin-bottom:0.75rem;
+  }
+  .countdown-title{
+    font-size:clamp(1.8rem, 5vw, 2.6rem);
+    margin-bottom:3rem;
+  }
+  .countdown-grid{
+    display:flex;
+    justify-content:center;
+    gap:clamp(1rem, 4vw, 3rem);
+    flex-wrap:wrap;
+  }
+  .count-unit{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    min-width:80px;
+  }
+  .count-num{
+    font-family:'Fraunces', serif;
+    font-size:clamp(2.4rem, 7vw, 4rem);
+    line-height:1;
+    color:var(--thread);
+    font-variant-numeric:tabular-nums;
+  }
+  .count-unit-label{
+    margin-top:0.6rem;
+    font-size:0.7rem;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    color:var(--wine-soft);
+  }
+  .countdown-date{
+    margin-top:2.5rem;
+    font-style:italic;
+    color:var(--wine-soft);
+    font-family:'Fraunces', serif;
+  }
+
+  /* ---------- TIMELINE ---------- */
+  .timeline-section{
+    padding:7rem 1.5rem;
+    max-width:760px;
+    margin:0 auto;
+  }
+  .timeline-header{
+    text-align:center;
+    margin-bottom:4.5rem;
+  }
+  .timeline-title{
+    font-size:clamp(2rem, 5vw, 2.8rem);
+  }
+  .thread-wrap{
+    position:relative;
+    padding-left:2.5rem;
+  }
+  .thread-line{
+    position:absolute;
+    left:6px;
+    top:8px;
+    bottom:8px;
+    width:2px;
+    background:linear-gradient(var(--thread), var(--rose));
+    transform-origin:top;
+  }
+  .timeline-item{
+    position:relative;
+    padding-bottom:3.5rem;
+  }
+  .timeline-item:last-child{padding-bottom:0;}
+  .timeline-dot{
+    position:absolute;
+    left:-2.5rem;
+    top:6px;
+    width:14px;
+    height:14px;
+    border-radius:50%;
+    background:var(--cream);
+    border:2px solid var(--thread);
+  }
+  .timeline-date{
+    font-size:0.72rem;
+    letter-spacing:0.15em;
+    text-transform:uppercase;
+    color:var(--rose);
+    margin-bottom:0.4rem;
+  }
+  .timeline-item h3{
+    font-size:1.4rem;
+    margin-bottom:0.5rem;
+    font-weight:400;
+    font-style:italic;
+  }
+  .timeline-item p{
+    color:var(--wine-soft);
+    font-size:0.95rem;
+    line-height:1.6;
+  }
+  .editable{
+    border-left:2px dashed var(--gold);
+    padding-left:0.8rem;
+  }
+  .edit-tag{
+    display:inline-block;
+    font-size:0.65rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--gold);
+    background:rgba(201,165,92,0.12);
+    padding:0.15rem 0.5rem;
+    border-radius:3px;
+    margin-bottom:0.4rem;
+  }
+
+  /* ---------- LETTER ---------- */
+  .letter-section{
+    background:var(--wine);
+    color:var(--cream);
+    padding:7rem 1.5rem;
+    text-align:center;
+  }
+  .letter-section .section-label{color:var(--rose);}
+  .letter-title{
+    font-size:clamp(2rem, 5vw, 2.8rem);
+    margin-bottom:2.5rem;
+  }
+  .envelope{
+    max-width:480px;
+    margin:0 auto;
+    cursor:pointer;
+    user-select:none;
+  }
+  .envelope-body{
+    background:var(--blush);
+    color:var(--wine);
+    border-radius:6px;
+    padding:2.5rem 2rem;
+    position:relative;
+    box-shadow:0 20px 40px rgba(0,0,0,0.25);
+    transition:transform 0.4s ease;
+  }
+  .envelope:hover .envelope-body{transform:translateY(-4px);}
+  .envelope-flap{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:1.1rem;
+    color:var(--wine-soft);
+  }
+  .envelope-cta{
+    margin-top:1.2rem;
+    font-size:0.7rem;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    color:var(--thread);
+  }
+  .letter-content{
+    display:none;
+    max-width:480px;
+    margin:2rem auto 0;
+    background:var(--blush);
+    color:var(--wine);
+    border-radius:6px;
+    padding:2.5rem 2rem;
+    text-align:left;
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:1.05rem;
+    line-height:1.9;
+    box-shadow:0 20px 40px rgba(0,0,0,0.25);
+  }
+  .letter-content.open{display:block;}
+  .letter-content .edit-tag{margin-bottom:0.8rem;}
+  .letter-signature{
+    margin-top:1.5rem;
+    text-align:right;
+    color:var(--rose);
+  }
+
+  /* ---------- GALLERY ---------- */
+  .gallery-section{
+    padding:7rem 1.5rem;
+    text-align:center;
+  }
+  .gallery-title{
+    font-size:clamp(2rem, 5vw, 2.8rem);
+    margin-bottom:3.5rem;
+  }
+  .gallery-grid{
+    max-width:900px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:1rem;
+  }
+  .gallery-slot{
+    aspect-ratio:1;
+    background:var(--blush);
+    border:1px dashed var(--rose);
+    border-radius:4px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--wine-soft);
+    font-size:1.8rem;
+    font-family:'Fraunces', serif;
+  }
+  @media (max-width:600px){
+    .gallery-grid{grid-template-columns:repeat(2, 1fr);}
+  }
+
+  footer{
+    text-align:center;
+    padding:3rem 1.5rem 4rem;
+    font-size:0.75rem;
+    letter-spacing:0.15em;
+    text-transform:uppercase;
+    color:var(--wine-soft);
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+</style>
+</head>
+<body class="locked">
+
+<div class="intro-overlay" id="intro-overlay">
+  <div class="heart-shape"></div>
+  <div class="intro-caption">Entrer</div>
+</div>
+
+<section class="hero">
+  <div class="hero-eyebrow">Depuis le 21 novembre</div>
+  <h1 class="hero-names">Théo <span class="hero-amp">&amp;</span> Nadja</h1>
+  <p class="hero-nicknames">George &amp; Joséphine</p>
+  <p class="hero-sub italic">Un fil rouge nous relie depuis le premier jour.</p>
+  <div class="scroll-hint">Découvrir</div>
+</section>
+
+<section class="countdown-section">
+  <div class="section-label">Bientôt</div>
+  <h2 class="countdown-title display">Notre premier anniversaire</h2>
+  <div class="countdown-grid">
+    <div class="count-unit"><div class="count-num" id="cd-days">--</div><div class="count-unit-label">Jours</div></div>
+    <div class="count-unit"><div class="count-num" id="cd-hours">--</div><div class="count-unit-label">Heures</div></div>
+    <div class="count-unit"><div class="count-num" id="cd-min">--</div><div class="count-unit-label">Minutes</div></div>
+    <div class="count-unit"><div class="count-num" id="cd-sec">--</div><div class="count-unit-label">Secondes</div></div>
+  </div>
+  <div class="countdown-date">21 novembre 2026 — un an ensemble</div>
+</section>
+
+<section class="timeline-section">
+  <div class="timeline-header">
+    <div class="section-label">Notre histoire</div>
+    <h2 class="timeline-title display">Le fil qui nous relie</h2>
+  </div>
+  <div class="thread-wrap">
+    <div class="thread-line" id="thread-line"></div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-date">8 octobre 2025</div>
+      <h3>Le premier regard</h3>
+      <p>C'était le jour de ton anniversaire, la toute première fois qu'on s'est parlé. Je t'ai souhaité ta fête, et on a enchaîné les snaps de nos têtes en faisant des grimaces. Le feeling est passé tout de suite : dès ce premier jour, j'ai senti quelque chose de différent. J'ai montré mon vrai moi sans réfléchir, et c'est là que je me suis dit que tu étais différente, toi aussi. Ce ressenti m'a donné confiance pour la suite. Je t'ai souhaité une dernière fois un joyeux anniversaire avant d'aller dormir, pendant que tu continuais ta soirée. Puis on s'est dit bonne nuit, bisous.</p>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-date">17 octobre 2025</div>
+      <h3>Le premier rendez-vous</h3>
+      <p>Ce jour-là, il y avait le premier goûter de classe, avant les vacances. Ce goûter a particulièrement marqué le tout début de nous deux, avant même le flirt : on n'a pas passé une seconde l'un sans l'autre, à parler pendant tout le goûter. Puis il y a eu ce fameux champomy qu'Elliot avait apporté. Après en avoir servi à toute la classe, il ne restait plus qu'un verre. Je voulais te le laisser, mais tu m'as proposé qu'on prenne le même verre, et qu'on le partage ensemble. Le goûter s'est terminé, plein de nos discussions, et il était temps de partir en vacances. J'ai voulu te souhaiter de bonnes vacances, mais tu étais déjà partie — alors je t'ai envoyé un snap, et tu me l'as rendu. À partir de là, on s'est mis à se parler tous les jours, à apprendre à se connaître, jusqu'au flirt.</p>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-date editable">
+        <span class="edit-tag">à personnaliser</span><br>
+        [Date où vous êtes devenus officiellement en couple]
+      </div>
+      <h3>Nous, officiellement</h3>
+      <p>[Le moment où votre histoire est devenue une évidence.]</p>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-date editable">
+        <span class="edit-tag">à personnaliser</span><br>
+        21 novembre 2026
+      </div>
+      <h3>Un an</h3>
+      <p>[Et aujourd'hui, un an plus tard — ce que vous avez envie de dire.]</p>
+    </div>
+  </div>
+</section>
+
+<section class="letter-section">
+  <div class="section-label">Pour toi</div>
+  <h2 class="letter-title display">Une lettre</h2>
+  <div class="envelope" id="envelope" onclick="openLetter()">
+    <div class="envelope-body" id="envelope-closed">
+      <div class="envelope-flap">« Ouvre-moi quand tu seras prêt·e »</div>
+      <div class="envelope-cta">Toucher pour ouvrir</div>
+    </div>
+  </div>
+  <div class="letter-content" id="letter-content">
+    <span class="edit-tag">à personnaliser</span>
+    <p>[Mon amour,]</p>
+    <br>
+    <p>[Écrivez ici votre lettre — ce que cette première année a représenté pour vous, ce que vous aimez chez l'autre, ce que vous espérez pour la suite. Ce texte est entièrement à vous.]</p>
+    <div class="letter-signature">— Théo</div>
+  </div>
+</section>
+
+<section class="gallery-section">
+  <div class="section-label">En images</div>
+  <h2 class="gallery-title display">Nos souvenirs</h2>
+  <div class="gallery-grid">
+    <div class="gallery-slot">+</div>
+    <div class="gallery-slot">+</div>
+    <div class="gallery-slot">+</div>
+    <div class="gallery-slot">+</div>
+    <div class="gallery-slot">+</div>
+    <div class="gallery-slot">+</div>
+  </div>
+</section>
+
+<footer>Théo &amp; Nadja — 21 novembre 2025</footer>
+
+<script>
+  // Intro heartbeat screen
+  const introOverlay = document.getElementById('intro-overlay');
+  function enterSite(){
+    introOverlay.classList.add('hide');
+    document.body.classList.remove('locked');
+  }
+  introOverlay.addEventListener('click', enterSite);
+  setTimeout(enterSite, 3200);
+</script>
+
+<script>
+  // Countdown
+  const target = new Date("2026-11-21T00:00:00");
+  function updateCountdown(){
+    const now = new Date();
+    let diff = target - now;
+    if(diff < 0) diff = 0;
+    const days = Math.floor(diff / (1000*60*60*24));
+    const hours = Math.floor((diff / (1000*60*60)) % 24);
+    const min = Math.floor((diff / (1000*60)) % 60);
+    const sec = Math.floor((diff / 1000) % 60);
+    document.getElementById('cd-days').textContent = days;
+    document.getElementById('cd-hours').textContent = String(hours).padStart(2,'0');
+    document.getElementById('cd-min').textContent = String(min).padStart(2,'0');
+    document.getElementById('cd-sec').textContent = String(sec).padStart(2,'0');
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  // Envelope open
+  function openLetter(){
+    document.getElementById('envelope').style.display = 'none';
+    document.getElementById('letter-content').classList.add('open');
+  }
+
+  // Thread line scroll reveal
+  const thread = document.getElementById('thread-line');
+  const wrap = document.querySelector('.thread-wrap');
+  function updateThread(){
+    const rect = wrap.getBoundingClientRect();
+    const vh = window.innerHeight;
+    const progress = Math.min(1, Math.max(0, (vh - rect.top) / (rect.height + vh*0.3)));
+    thread.style.transform = 'scaleY(' + progress + ')';
+  }
+  thread.style.transform = 'scaleY(0)';
+  window.addEventListener('scroll', updateThread);
+  window.addEventListener('resize', updateThread);
+  updateThread();
+</script>
+
+</body>
+</html>
